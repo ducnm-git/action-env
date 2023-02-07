@@ -23,9 +23,9 @@ jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
-    needs: ["environment-check"]
+    needs: ["get-environment"]
     environment: 
-      name: ${{ needs.get-environment.outputs.GETENV }}
+      name: ${{ jobs.get-environment.outputs.GETENV }}
     steps:
     # checkout the repo
     - name: 'Checkout GitHub Action'
