@@ -36,13 +36,13 @@ jobs:
     - name: Checkout GitHub Action
       uses: actions/checkout@main
     
-    - name: Login Docker Container Registry ${{ env.APP_ENVIRONMENT }} environment
+    - name: Login Docker Container Registry env ${{ env.APP_ENVIRONMENT }}
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Build and push
+    - name: Build and push env ${{ env.APP_ENVIRONMENT }}
       uses: docker/build-push-action@v3
       with:
         push: true
