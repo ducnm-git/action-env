@@ -30,7 +30,7 @@ jobs:
     env:
       GETENV: ${{ needs.get-environment.outputs.GETENV }}
     environment: 
-      name: ${{ env.GETENV }}
+      name: ${{ needs.get-environment.outputs.GETENV }}
     steps:
     # checkout the repo
     - name: 'Checkout GitHub Action'
