@@ -12,8 +12,11 @@ env:
 jobs:
   get-environment:
     runs-on: ubuntu-latest
+    outputs:
+      GETENV: ${{ steps.get-env.outputs.GETENV }}
     steps:
     - name: 'Get environment name'
+      id: get-env
       run: |
         env="${{ github.ref_name }}"
         if [[ "${{ github.ref_name }}" == "master" ]]; then
