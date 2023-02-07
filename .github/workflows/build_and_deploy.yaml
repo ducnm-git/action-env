@@ -10,10 +10,23 @@ env:
   APP_NAME: "action-env"
 
 jobs:
+  environment-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Get environment name'
+      id: "get-environment"
+      run: |
+        env="${{ github.ref_name }}"
+        if [[ "${{ github.ref_name }}" == "master" ]]; then
+          env="production"
+        fi
+        echo "GETENV=${env}" >> $GITHUB_OUTPUT
+
   build-and-deploy:
     runs-on: ubuntu-latest
+    needs: ["environment-check"]
     environment: 
-      name: ${{ github.ref_name }}
+      name: ${{ steps.get-environment.outputs.GETENV }}
     steps:
     # checkout the repo
     - name: 'Checkout GitHub Action'
